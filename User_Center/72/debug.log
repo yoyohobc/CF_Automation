@@ -1,0 +1,7 @@
+[1019/180238.540:ERROR:process_reader_win.cc(151)] SuspendThread: 存取被拒。 (0x5)
+[1019/180238.541:ERROR:process_reader_win.cc(123)] NtOpenThread: {拒絕存取} 程序已請求存取一物件，但未被授與存取權。 (0xc0000022)
+[1019/180238.541:ERROR:exception_snapshot_win.cc(99)] thread ID 8936 not found in process
+[1020/173227.864:ERROR:directory_reader_win.cc(43)] FindFirstFile: 系統找不到指定的路徑。 (0x3)
+[1021/160221.992:ERROR:directory_reader_win.cc(43)] FindFirstFile: 系統找不到指定的路徑。 (0x3)
+[1026/163439.014:ERROR:directory_reader_win.cc(43)] FindFirstFile: 系統找不到指定的路徑。 (0x3)
+[1026/164858.285:ERROR:directory_reader_win.cc(43)] FindFirstFile: 系統找不到指定的路徑。 (0x3)
