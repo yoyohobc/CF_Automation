@@ -4,14 +4,17 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import unittest, time, re, os
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+from selenium.common.exceptions import NoSuchElementException
 from random import Random
-#用戶中心登入頁面
+#用戶中心登入頁面PRD
 PC_URL = 'https://cftrader.com/'
 #開啟真實帳號
 create_account_url = 'https://ac.cfd139.com/cn/pc/rcfd_account'
 #真實帳號註冊頁面
 real_register_url = 'http://ac108.trexttd.com/registerNextPc.html'
 random = Random()
+#已註冊手機
+registered_phone = '18856818076'
 # 指定OS
 OS = 'Windows'
 #OS = 'Mac'
@@ -91,3 +94,11 @@ def Random_String_Number(self,length):
         random_numbers+=chars[random.randint(0,len(chars) - 1)]
 
     return random_numbers
+
+def Jump_to_RegisterPage(self):
+    #登入頁面
+    self.browser.get(PC_URL)
+    #點擊還沒有帳號
+    self.browser.find_element_by_xpath('//*[@id="supplementSubmi"]/div[4]/a[1]').click()
+    #切換至最新開啟視窗
+    self.browser.switch_to.window(self.browser.window_handles[-1])

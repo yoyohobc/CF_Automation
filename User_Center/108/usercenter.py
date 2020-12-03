@@ -44,12 +44,12 @@ else:
     else:
         # browser = webdriver.Chrome()
         options = webdriver.ChromeOptions()
-        
+
         # 隱藏"Chrome is being controlled by automated software" Infobar
         # options.add_argument('disable-infobars') -- 無效
         options.add_experimental_option("excludeSwitches", ["enable-automation"])
         options.add_experimental_option('useAutomationExtension', False)
- 
+
         # 隱藏視窗
         # options.add_argument('headless')
 
@@ -66,7 +66,7 @@ def creat_suite():
     uit = unittest.TestSuite()
     #discover = unittest.defaultTestLoader.discover(testcase_path, pattern="test_*.py")
     #discover = unittest.defaultTestLoader.discover(specific_testcase_path, pattern="test_*.py")
-    discover = unittest.defaultTestLoader.discover(testcase_path, pattern="test_1_1*.py")
+    discover = unittest.defaultTestLoader.discover(testcase_path, pattern="test_1_2*.py")
 
     for test_suite in discover:
         print(test_suite)
