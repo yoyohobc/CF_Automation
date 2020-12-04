@@ -102,3 +102,6 @@ def Jump_to_RegisterPage(self):
     self.browser.find_element_by_xpath('//*[@id="supplementSubmi"]/div[4]/a[1]').click()
     #切換至最新開啟視窗
     self.browser.switch_to.window(self.browser.window_handles[-1])
+
+def register_phone_field(self):
+    return self.browser.find_element_by_xpath('//*[@id="phone"]')
