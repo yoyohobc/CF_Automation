@@ -6,6 +6,8 @@ import unittest, time, re, os
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.common.exceptions import NoSuchElementException
 from random import Random
+import requests
+import json
 #用戶中心登入頁面PRD
 PC_URL = 'https://cftrader.com/'
 #開啟真實帳號
@@ -102,6 +104,50 @@ def Jump_to_RegisterPage(self):
     self.browser.find_element_by_xpath('//*[@id="supplementSubmi"]/div[4]/a[1]').click()
     #切換至最新開啟視窗
     self.browser.switch_to.window(self.browser.window_handles[-1])
-
+#手機欄位
 def register_phone_field(self):
     return self.browser.find_element_by_xpath('//*[@id="phone"]')
+#密碼欄位
+def register_password_field(self):
+    return self.browser.find_element_by_xpath('//*[@id="upwd"]')
+#驗證碼欄位
+def register_validatecode_field(self):
+    return self.browser.find_element_by_xpath('//*[@id="yanZ"]')
+#申請開戶
+def register_submitInfo_button(self):
+    return self.browser.find_element_by_xpath('//*[@id="submitInfo"]')
+
+#隨機產生電話
+def random_phone_number(self,length=8):
+	area_list = ['130', '131', '132', '133', '134', '135', '136', '137',
+	'138', '139', '150', '151', '152', '153', '154', '155', '156', '157', '158', '159','188','189']
+	numbers = '0123456789'
+	random_phone = random.choice(area_list)
+	for i in range(length):
+		random_phone+=numbers[random.randint(0,9)]
+	return random_phone
+#獲取驗證碼API
+def register_account_api(self,random_phone):
+    request_url = "https://office.cf139.com/ValidateCodeLog/createValidateNo"
+
+    payload = random_phone
+    headers = {
+      'Connection': 'close',
+      'authority': 'office.cf139.com',
+      'accept': 'application/json, text/plain, */*',
+      'user-agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1',
+      'content-type': 'application/json;charset=UTF-8',
+      'origin': 'https://office.cf139.com',
+      'sec-fetch-site': 'same-origin',
+      'sec-fetch-mode': 'cors',
+      'sec-fetch-dest': 'empty',
+      'referer': 'https://office.cf139.com/home/validater/validateNo',
+      'accept-language': 'zh-TW,zh;q=0.9,en-US;q=0.8,en;q=0.7',
+      'cookie': 'lang_type=0; JSESSIONID=84871DBC50AD6CCE38923B5F4F7FC5DF; cf88_id="user:763:869480c1-ce0e-4232-9a65-65b9336b2cec"'
+    }
+
+    response = requests.request("POST", request_url, headers=headers, data = payload,verify = False)
+    #print(response.text.encode('utf8'))
+    data = response.json()
+    #回傳驗證碼
+    return data['data']

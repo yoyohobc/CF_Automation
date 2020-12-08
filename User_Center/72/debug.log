@@ -5,3 +5,7 @@
 [1021/160221.992:ERROR:directory_reader_win.cc(43)] FindFirstFile: ╰参тぃ﹚隔畖 (0x3)
 [1026/163439.014:ERROR:directory_reader_win.cc(43)] FindFirstFile: ╰参тぃ﹚隔畖 (0x3)
 [1026/164858.285:ERROR:directory_reader_win.cc(43)] FindFirstFile: ╰参тぃ﹚隔畖 (0x3)
+[1208/121005.094:ERROR:process_reader_win.cc(123)] NtOpenThread: {拒絕存取} 程序已請求存取一物件，但未被授與存取權。 (0xc0000022)
+[1208/121005.094:ERROR:exception_snapshot_win.cc(99)] thread ID 10748 not found in process
+[1208/121005.108:ERROR:process_reader_win.cc(123)] NtOpenThread: {拒絕存取} 程序已請求存取一物件，但未被授與存取權。 (0xc0000022)
+[1208/121005.108:ERROR:exception_snapshot_win.cc(99)] thread ID 8856 not found in process
