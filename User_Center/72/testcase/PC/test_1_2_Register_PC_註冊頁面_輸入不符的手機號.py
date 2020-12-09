@@ -37,7 +37,8 @@ class WebDriverTests(unittest.TestCase):
 			phone_filed.clear()
 			phone_filed.send_keys(inputs[i])
 			submitInfo_button.click()
-			time.sleep(2)
+			time.sleep(1)
+			print('目前輸入:',inputs[i])
 			#抓提示字
 			alert_text=self.browser.find_element_by_xpath('//*[@id="submitForm"]/div[2]/span').text
 			if(alert_text==expect_result[i]):
@@ -52,4 +53,12 @@ class WebDriverTests(unittest.TestCase):
 		phone_filed.clear()
 		phone_filed.send_keys(long_phone)
 		submitInfo_button.click()
-		time.sleep(2)
+		time.sleep(1)
+		print('目前輸入:',long_phone)
+		value_expect=long_phone[:11]
+		value=phone_filed.get_attribute("value")
+		if(value==value_expect):
+			print('正確!輸入欄不顯示長度超出11的號碼:',value)
+		else:
+			print('錯誤!輸入欄顯示為:',value)
+			self.assertEqual(value_expect,value)

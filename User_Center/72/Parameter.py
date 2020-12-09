@@ -7,6 +7,7 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.common.exceptions import NoSuchElementException
 from random import Random
 import requests
+import string
 import json
 #用戶中心登入頁面PRD
 PC_URL = 'https://cftrader.com/'
@@ -94,7 +95,6 @@ def Random_String_Number(self,length):
     random_numbers = ''
     for j in range(length):
         random_numbers+=chars[random.randint(0,len(chars) - 1)]
-
     return random_numbers
 
 def Jump_to_RegisterPage(self):
@@ -126,6 +126,37 @@ def random_phone_number(self,length=8):
 	for i in range(length):
 		random_phone+=numbers[random.randint(0,9)]
 	return random_phone
+#純字母
+def random_pure_letters(self,length=8):
+    letters=''
+    for i in range(length):
+        letters+=random.choice(string.ascii_letters)
+    return letters
+#純數字
+def random_pure_digits(self,length=8):
+    digits=''
+    for i in range(length):
+        digits+=random.choice(string.digits)
+    return digits
+
+#隨機產生符號
+def generate_random_symbols(self,length=8):
+	chars = '/*-+=-(){}[]\#$%^&*!~`,.?/"_"|<>;:'
+	chars_length = len(chars) - 1
+	random_symbols = ''
+	for i in range(length):
+		random_symbols+=chars[random.randint(0,chars_length)]
+	return random_symbols
+
+#隨機產生密碼
+def generate_random_password(self,length=8):
+	chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqstuvwxyz0123456789'
+	chars_length = len(chars) - 1
+	random_password = ''
+	for i in range(length-1):
+		random_password+=chars[random.randint(0,chars_length)]
+	random_password+=random.choice(string.digits)
+	return random_password
 #獲取驗證碼API
 def register_account_api(self,random_phone):
     request_url = "https://office.cf139.com/ValidateCodeLog/createValidateNo"
