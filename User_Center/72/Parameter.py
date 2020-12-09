@@ -116,7 +116,9 @@ def register_validatecode_field(self):
 #申請開戶
 def register_submitInfo_button(self):
     return self.browser.find_element_by_xpath('//*[@id="submitInfo"]')
-
+#獲取驗證碼按鈕
+def register_validatecode_button(self):
+    return self.browser.find_element_by_xpath('//*[@id="submitForm"]/div[5]/a[1]')
 #隨機產生電話
 def random_phone_number(self,length=8):
 	area_list = ['130', '131', '132', '133', '134', '135', '136', '137',
