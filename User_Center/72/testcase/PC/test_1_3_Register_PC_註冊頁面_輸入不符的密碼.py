@@ -35,7 +35,9 @@ class WebDriverTests(unittest.TestCase):
 		digits = random_pure_digits(self,random.randint(5,16))
 		#分別測試以下三種情況彈出的提示字
 		actions=('輸入一個不符合規則的密碼，進行註冊','輸入低於5位的密碼，進行註冊','輸入純數字的密碼，進行註冊','輸入純字母的密碼，進行註冊')
+		#輸入
 		inputs = (symbols,short_password,digits,letters)
+		#預期提示字
 		expect_result = '密码为5-16位字符，必须包含字母和数字!'
 		length = len(actions)
 		for i in range(length):

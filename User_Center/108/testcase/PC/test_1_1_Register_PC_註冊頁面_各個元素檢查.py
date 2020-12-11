@@ -15,8 +15,8 @@ class WebDriverTests(unittest.TestCase):
 	    print('-- tear down finished -- ')
 
 
-	def test_1_1_Register_PC(self):
-		print('==========test_1_1_Register_PC_註冊頁面、各個元素檢查==========')
+	def test_1_1_Register_PC_註冊頁面_各個元素檢查(self):
+		print('==========test_1_1_Register_PC_註冊頁面_各個元素檢查==========')
 		browser = self.browser
 		#登入頁面
 		browser.get(PC_URL)
