@@ -13,7 +13,7 @@ class WebDriverTests(unittest.TestCase):
 
 	def tearDown(self):
 	    time.sleep(1)
-	    #self.browser.quit()
+	    self.browser.quit()
 	    print('-- tear down finished -- ')
 
 

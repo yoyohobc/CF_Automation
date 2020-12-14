@@ -104,6 +104,28 @@ def Jump_to_RegisterPage(self):
     self.browser.find_element_by_xpath('//*[@id="supplementSubmi"]/div[4]/a[1]').click()
     #切換至最新開啟視窗
     self.browser.switch_to.window(self.browser.window_handles[-1])
+#第一階段註冊(電話、密碼、驗證碼)
+def Register_stage_one(self):
+    #電話欄
+    phone_field = register_phone_field(self)
+    #密碼欄
+    password_field = register_password_field(self)
+    #驗證碼欄位
+    validatecode_field = register_validatecode_field(self)
+    #申請開戶鈕
+    submitInfo_button = register_submitInfo_button(self)
+    #隨機電話號碼
+    random_phone = random_phone_number(self)
+    #獲取驗證碼API
+    validate_code = register_account_api(self,random_phone)
+    #輸入隨機手機
+    phone_field.send_keys(random_phone)
+    #輸入密碼
+    password_field.send_keys('abc123')
+    #輸入驗證碼
+    validatecode_field.send_keys(validate_code)
+    #申請開戶
+    submitInfo_button.click()
 #手機欄位
 def register_phone_field(self):
     return self.browser.find_element_by_xpath('//*[@id="phone"]')
@@ -119,6 +141,24 @@ def register_submitInfo_button(self):
 #獲取驗證碼按鈕
 def register_validatecode_button(self):
     return self.browser.find_element_by_xpath('//*[@id="submitForm"]/div[5]/a[1]')
+#姓名欄
+def register_name_field(self):
+    return self.browser.find_element_by_xpath('//*[@id="uname"]')
+#身分證
+def register_idCard_field(self):
+    return self.browser.find_element_by_xpath('//*[@id="idCard"]')
+#email
+def register_email_field(self):
+    return self.browser.find_element_by_xpath('//*[@id="email"]')
+#完成開戶
+def register_submitForm_button(self):
+    return self.browser.find_element_by_xpath('//*[@id="submitForm"]')
+
+def Chinese_name_generator():
+    ch_name = ''
+    for i in range(3):
+        ch_name += chr(random.randint(0x4e00, 0x9fbf))
+    return ch_name
 #隨機產生電話
 def random_phone_number(self,length=8):
 	area_list = ['130', '131', '132', '133', '134', '135', '136', '137',
