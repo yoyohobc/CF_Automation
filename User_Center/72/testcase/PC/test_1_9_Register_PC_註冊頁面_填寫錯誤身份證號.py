@@ -22,21 +22,13 @@ class WebDriverTests(unittest.TestCase):
 		Jump_to_RegisterPage(self)
 		#第一階段註冊(電話、密碼、驗證碼)
 		Register_stage_one(self)
-		#姓名欄
-		name_field=register_name_field(self)
-		#身分證
-		idCard_field=register_idCard_field(self)
-		#email
-		email_field=register_email_field(self)
-		#完成開戶
-		submitForm_button=register_submitForm_button(self)
 		#隨機名字
 		name=Chinese_name_generator()
 		#隨機身分證
 		idCard=random_pure_digits(self,18)
-		name_field.send_keys(name)
-		idCard_field.send_keys(idCard)
-		email_field.send_keys('yoyododohoho@gmail.com')
+		#填入欄位並送出
+		#第二階段註冊(姓名、身分證、電郵)
+		Register_stage_two(self,name,idCard)
 
 		#提示字
 		alert_text = self.browser.find_element_by_xpath('//*[@id="regForm"]/div[4]/span').text

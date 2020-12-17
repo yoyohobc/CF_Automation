@@ -6,9 +6,10 @@ import unittest, time, re, os
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.common.exceptions import NoSuchElementException
 from random import Random
-import requests
-import string
-import json
+from id_number_util.identity import *
+from datetime import date
+import requests,string,json,csv
+
 #用戶中心登入頁面PRD
 PC_URL = 'https://cftrader.com/'
 #開啟真實帳號
@@ -18,6 +19,8 @@ real_register_url = 'http://ac108.trexttd.com/registerNextPc.html'
 random = Random()
 #已註冊手機
 registered_phone = '18856818076'
+#帳號資訊
+account_csv = '帳號列表.csv'
 # 指定OS
 OS = 'Windows'
 #OS = 'Mac'
@@ -126,6 +129,38 @@ def Register_stage_one(self):
     validatecode_field.send_keys(validate_code)
     #申請開戶
     submitInfo_button.click()
+    return random_phone
+#第二階段註冊(姓名、身分證、電郵)
+def Register_stage_two(self,name,idCard,email='yoyododohoho@gmail.com'):
+    #姓名欄
+    name_field=register_name_field(self)
+    #身分證
+    idCard_field=register_idCard_field(self)
+    #email
+    email_field=register_email_field(self)
+    #完成開戶
+    submitForm_button=register_submitForm_button(self)
+    #填入欄位並送出
+    name_field.send_keys(name)
+    idCard_field.send_keys(idCard)
+    email_field.send_keys(email)
+    submitForm_button.click()
+def Write_account_information(account_num,password='abc123',account_type='真實',account_lvl='標準'):
+    # 讀取預約表(方便寫入資料)
+    with open(account_csv, newline='',encoding="utf-8") as csvfile:
+        #讀取預約表內容並存入writed_csv
+        rows = csv.reader(csvfile)
+        writed_csv = list(rows)
+    #寫入(新增帳號資訊)
+    with open(account_csv, 'w', newline='',encoding="utf-8") as csvfile:
+        writer = csv.writer(csvfile)
+        #當前日期(YYYY-MM-DD)
+        today = str(date.today())
+        #寫入[帳號,密碼,真實/模擬,帳戶等級,日期]
+        account_information = [account_num,password,account_type,account_lvl,today]
+        writed_csv.append(account_information)
+        # 寫入CSV
+        writer.writerows(writed_csv)
 #手機欄位
 def register_phone_field(self):
     return self.browser.find_element_by_xpath('//*[@id="phone"]')
@@ -135,12 +170,13 @@ def register_password_field(self):
 #驗證碼欄位
 def register_validatecode_field(self):
     return self.browser.find_element_by_xpath('//*[@id="yanZ"]')
-#申請開戶
-def register_submitInfo_button(self):
-    return self.browser.find_element_by_xpath('//*[@id="submitInfo"]')
 #獲取驗證碼按鈕
 def register_validatecode_button(self):
     return self.browser.find_element_by_xpath('//*[@id="submitForm"]/div[5]/a[1]')
+#申請開戶
+def register_submitInfo_button(self):
+    return self.browser.find_element_by_xpath('//*[@id="submitInfo"]')
+
 #姓名欄
 def register_name_field(self):
     return self.browser.find_element_by_xpath('//*[@id="uname"]')
@@ -152,7 +188,7 @@ def register_email_field(self):
     return self.browser.find_element_by_xpath('//*[@id="email"]')
 #完成開戶
 def register_submitForm_button(self):
-    return self.browser.find_element_by_xpath('//*[@id="submitForm"]')
+    return self.browser.find_element_by_xpath('/html/body/div[3]/div/div[1]/div[6]')
 
 def Chinese_name_generator():
     ch_name = ''
@@ -217,6 +253,31 @@ def register_account_api(self,random_phone):
       'referer': 'https://office.cf139.com/home/validater/validateNo',
       'accept-language': 'zh-TW,zh;q=0.9,en-US;q=0.8,en;q=0.7',
       'cookie': 'lang_type=0; JSESSIONID=84871DBC50AD6CCE38923B5F4F7FC5DF; cf88_id="user:763:869480c1-ce0e-4232-9a65-65b9336b2cec"'
+    }
+
+    response = requests.request("POST", request_url, headers=headers, data = payload,verify = False)
+    #print(response.text.encode('utf8'))
+    data = response.json()
+    #回傳驗證碼
+    return data['data']
+
+#白名單API
+def register_whitelist_api(self,random_phone):
+    request_url = "https://office.cf139.com/whitelists/edit"
+
+    payload = "{\"status\":1,\"phone\":\""+random_phone+"\"}"
+    headers = {
+      'authority': 'office.cf139.com',
+      'accept': 'application/json, text/plain, */*',
+      'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36',
+      'content-type': 'application/json;charset=UTF-8',
+      'origin': 'https://office.cf139.com',
+      'sec-fetch-site': 'same-origin',
+      'sec-fetch-mode': 'cors',
+      'sec-fetch-dest': 'empty',
+      'referer': 'https://office.cf139.com/home/whitelist/index',
+      'accept-language': 'zh-TW,zh;q=0.9,en-US;q=0.8,en;q=0.7',
+      'cookie': 'JSESSIONID=B9F4F676CC7B8728FF5EB497C6CA6FF1; cf88_id="user:763:99919735-b166-41db-bc21-fdd84d0c6734"; lang_type=0'
     }
 
     response = requests.request("POST", request_url, headers=headers, data = payload,verify = False)
