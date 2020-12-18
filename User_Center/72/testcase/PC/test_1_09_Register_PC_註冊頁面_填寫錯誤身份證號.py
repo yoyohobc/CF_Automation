@@ -16,8 +16,8 @@ class WebDriverTests(unittest.TestCase):
 	    self.browser.quit()
 	    print('-- tear down finished -- ')
 
-	def test_1_9_Register_PC_註冊頁面_填寫錯誤身份證號(self):
-		print('==========test_1_9_Register_PC_註冊頁面_填寫錯誤身份證號==========')
+	def test_1_09_Register_PC_註冊頁面_填寫錯誤身份證號(self):
+		print('==========test_1_09_Register_PC_註冊頁面_填寫錯誤身份證號==========')
 		#跳至註冊頁(Parameter)
 		Jump_to_RegisterPage(self)
 		#第一階段註冊(電話、密碼、驗證碼)

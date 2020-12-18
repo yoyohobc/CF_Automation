@@ -17,23 +17,23 @@ class WebDriverTests(unittest.TestCase):
 	    print('-- tear down finished -- ')
 
 
-	def test_1_8_Register_PC_註冊頁面_在線客服(self):
-		print('==========test_1_8_Register_PC_註冊頁面_在線客服==========')
+	def test_1_07_Register_PC_註冊頁面_隱私政策(self):
+		print('==========test_1_07_Register_PC_註冊頁面_隱私政策==========')
 		#跳至註冊頁(Parameter)
 		Jump_to_RegisterPage(self)
-		print('點擊"在线客服"')
-		#在线客服
-		self.browser.find_element_by_xpath('/html/body/div[1]/div/div[2]/a').click()
+		print('點擊"创富国际的隐私政策"')
+		#创富国际的隐私政策。
+		self.browser.find_element_by_xpath('/html/body/div[3]/div/div[1]/div[3]/a').click()
 		time.sleep(2)
 		#切換至最新開啟視窗
 		self.browser.switch_to.window(self.browser.window_handles[-1])
 		#目前跳轉網址
 		addressURL = self.browser.current_url
-		#在線客服網址
-		addressURL_expect = 'https://www.cf-service.com/k800/chatClient/chatbox.jsp'
+		#隱私政策網址
+		addressURL_expect = 'https://img.cfd139.com/source/material/privacyPolicy.html'
 
-		if(addressURL[:54] == addressURL_expect):
+		if(addressURL == addressURL_expect):
 			print('正確!目前頁面跳轉至:',addressURL)
 		else:
 			print('錯誤!目前頁面跳轉至:',addressURL)
-			self.assertEqual(addressURL[:54],addressURL_expect)
+			self.assertEqual(addressURL,addressURL_expect)

@@ -17,8 +17,8 @@ class WebDriverTests(unittest.TestCase):
 	    print('-- tear down finished -- ')
 
 
-	def test_1_3_Register_PC_註冊頁面_輸入不符的密碼(self):
-		print('==========test_1_3_Register_PC_註冊頁面_輸入不符的密碼==========')
+	def test_1_03_Register_PC_註冊頁面_輸入不符的密碼(self):
+		print('==========test_1_03_Register_PC_註冊頁面_輸入不符的密碼==========')
 		#跳至註冊頁(Parameter)
 		Jump_to_RegisterPage(self)
 		#密碼欄

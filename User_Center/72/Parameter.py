@@ -265,7 +265,7 @@ def register_account_api(self,random_phone):
 def register_whitelist_api(self,random_phone):
     request_url = "https://office.cf139.com/whitelists/edit"
 
-    payload = "{\"status\":1,\"phone\":\""+random_phone+"\"}"
+    payload = "{\"status\":1,\"remark\":\"YoYo-自動測試\",\"phone\":\""+random_phone+"\"}"
     headers = {
       'authority': 'office.cf139.com',
       'accept': 'application/json, text/plain, */*',
@@ -280,7 +280,7 @@ def register_whitelist_api(self,random_phone):
       'cookie': 'JSESSIONID=B9F4F676CC7B8728FF5EB497C6CA6FF1; cf88_id="user:763:99919735-b166-41db-bc21-fdd84d0c6734"; lang_type=0'
     }
 
-    response = requests.request("POST", request_url, headers=headers, data = payload,verify = False)
+    response = requests.request("POST", request_url, headers=headers, data = payload.encode("utf-8").decode("latin1"),verify = False)
     #print(response.text.encode('utf8'))
     data = response.json()
     #回傳驗證碼

@@ -17,8 +17,8 @@ class WebDriverTests(unittest.TestCase):
 	    print('-- tear down finished -- ')
 
 
-	def test_1_5_Register_PC_註冊頁面_輸入驗證碼(self):
-		print('==========test_1_5_Register_PC_註冊頁面_輸入驗證碼==========')
+	def test_1_05_Register_PC_註冊頁面_輸入驗證碼(self):
+		print('==========test_1_05_Register_PC_註冊頁面_輸入驗證碼==========')
 		#跳至註冊頁(Parameter)
 		Jump_to_RegisterPage(self)
 		#電話欄

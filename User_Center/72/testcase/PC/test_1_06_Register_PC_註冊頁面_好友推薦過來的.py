@@ -17,8 +17,8 @@ class WebDriverTests(unittest.TestCase):
 	    print('-- tear down finished -- ')
 
 
-	def test_1_6_Register_PC_註冊頁面_好友推薦過來的(self):
-		print('==========test_1_6_Register_PC_註冊頁面_好友推薦過來的==========')
+	def test_1_06_Register_PC_註冊頁面_好友推薦過來的(self):
+		print('==========test_1_06_Register_PC_註冊頁面_好友推薦過來的==========')
 		#跳至註冊頁(Parameter)
 		Jump_to_RegisterPage(self)
 		print('點擊"好友推荐过来的？"')
