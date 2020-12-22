@@ -161,15 +161,15 @@ def Write_account_information(account_num,password='abc123',account_type='真實
         writed_csv.append(account_information)
         # 寫入CSV
         writer.writerows(writed_csv)
-#帳號欄
-def login_account_field(self):
-    return self.browser.find_element_by_xpath('//*[@id="accountNumber"]')
-#密碼欄
-def login_password_field(self):
-    return self.browser.find_element_by_xpath('//*[@id="idName"]')
-#登入按鈕
-def login_submit_button(self):
-    return self.browser.find_element_by_xpath('//*[@id="subAll"]')
+#登入元素
+def login_elements(self):
+    #帳號欄
+    account_field = self.browser.find_element_by_xpath('//*[@id="accountNumber"]')
+    #密碼欄
+    password_field = self.browser.find_element_by_xpath('//*[@id="idName"]')
+    #登入按鈕
+    submit_button = self.browser.find_element_by_xpath('//*[@id="subAll"]')
+    return account_field,password_field,submit_button
 #手機欄位
 def register_phone_field(self):
     return self.browser.find_element_by_xpath('//*[@id="phone"]')
