@@ -273,8 +273,9 @@ def register_account_api(self,random_phone):
 #白名單API
 def register_whitelist_api(self,random_phone):
     request_url = "https://office.cf139.com/whitelists/edit"
-
-    payload = "{\"status\":1,\"remark\":\"YoYo-自動測試\",\"phone\":\""+random_phone+"\"}"
+    seconds = str(int(time.time()))
+    #payload = "{\"status\":1,\"remark\":\"YoYo-自動測試\",\"phone\":\""+random_phone+"\"}"
+    payload = "{\"phone\":\""+random_phone+"\",\"createTime\":1608542350760,\"ip\":\"\",\"updateTime\":"+seconds+",\"remark\":\"YoYo-自動測試\",\"id\":1593,\"idNumber\":\"\",\"email\":\"\",\"status\":1}"
     headers = {
       'authority': 'office.cf139.com',
       'accept': 'application/json, text/plain, */*',
