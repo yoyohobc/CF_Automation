@@ -20,12 +20,8 @@ class WebDriverTests(unittest.TestCase):
 		print('==========test_2_01_Login_PC_登錄頁面元素檢查==========')
 		#登入頁面
 		self.browser.get(PC_URL)
-		#帳號欄
-		account_field = login_account_field(self)
-		#密碼欄
-		password_field = login_password_field(self)
-		#登入按鈕
-		submit_button = login_submit_button(self)
+		#帳號欄、密碼欄、登入按鈕
+		account_field,password_field,submit_button = login_elements(self)
 		#創富logo
 		elements_expect = ('https://cftrader.com/dist/images/LOGO.png', 'https://cftrader.com/dist/images/login-text.png', '在线客服', '欢迎来到用户中心', '请输入账户/手机号', '请输入密码', '登录')
 		elements=(('創富國際logo',self.browser.find_element_by_xpath('//*[@id="mian"]/div[1]/img[1]').get_attribute("src")),
