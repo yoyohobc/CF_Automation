@@ -42,4 +42,4 @@ class WebDriverTests(unittest.TestCase):
 			print('錯誤!填寫正確的身份證號、姓名、郵箱號註冊失敗')
 			self.assertEqual(success_text[8:],success_text_expect)
 		#將帳號資訊寫入csv
-		Write_account_information(success_text[:8])
+		Write_account_information(success_text[:8],random_phone)
