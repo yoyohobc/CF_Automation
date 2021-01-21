@@ -19,6 +19,9 @@ real_register_url = 'http://ac108.trexttd.com/registerNextPc.html'
 random = Random()
 #已註冊手機
 registered_phone = '18856818076'
+#模擬帳號
+demo_account = '11092698'
+demo_phone = '15935988895'
 #帳號資訊
 account_csv = '帳號列表.csv'
 # 指定OS
@@ -145,7 +148,7 @@ def Register_stage_two(self,name,idCard,email='yoyododohoho@gmail.com'):
     idCard_field.send_keys(idCard)
     email_field.send_keys(email)
     submitForm_button.click()
-def Write_account_information(account_num,password='abc123',account_type='真實',account_lvl='標準'):
+def Write_account_information(account_num,random_phone,password='abc123',account_type='真實',account_lvl='標準'):
     # 讀取預約表(方便寫入資料)
     with open(account_csv, newline='',encoding="utf-8") as csvfile:
         #讀取預約表內容並存入writed_csv
@@ -156,8 +159,8 @@ def Write_account_information(account_num,password='abc123',account_type='真實
         writer = csv.writer(csvfile)
         #當前日期(YYYY-MM-DD)
         today = str(date.today())
-        #寫入[帳號,密碼,真實/模擬,帳戶等級,日期]
-        account_information = [account_num,password,account_type,account_lvl,today]
+        #寫入[帳號,密碼,真實/模擬,帳戶等級,日期,電話]
+        account_information = [account_num,random_phone,password,account_type,account_lvl,today]
         writed_csv.append(account_information)
         # 寫入CSV
         writer.writerows(writed_csv)

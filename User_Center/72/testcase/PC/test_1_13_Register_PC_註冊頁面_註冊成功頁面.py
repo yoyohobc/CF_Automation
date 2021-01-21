@@ -42,7 +42,7 @@ class WebDriverTests(unittest.TestCase):
 			print('錯誤!開戶訊息顯示:',success_text)
 			self.assertEqual(success_text[8:],success_text_expect)
 		#將帳號資訊寫入csv
-		Write_account_information(success_text[:8])
+		Write_account_information(success_text[:8],random_phone)
 		#創富logo
 		elements_expect = ('https://img.cfd139.com/source/www/template/logo-black.png', 'https://ac.cfd139.com/images/pc/pc-chenggong-img.jpg', '可用手机号或账号登录用户中心及交易平台', '当天注资，领 5000 美元赠金+现金红包！', '下载体验', '注资领赠金', '在线客服')
 		elements=(('創富國際logo',self.browser.find_element_by_xpath('/html/body/div[1]/div/div[1]/a/img').get_attribute("src")),
