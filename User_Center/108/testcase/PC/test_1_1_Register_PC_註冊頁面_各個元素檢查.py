@@ -30,6 +30,7 @@ class WebDriverTests(unittest.TestCase):
 		else:
 			print('錯誤!开启真实账户顯示:',title)
 			raise AssertionError('錯誤!开启真实账户顯示:',title)
+
 		#註冊頁面元素檢查
 		register_phone = browser.find_element_by_xpath('//*[@id="accountNumber"]')
 
